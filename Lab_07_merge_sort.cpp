@@ -1,102 +1,71 @@
-
-#include <iostream>
+#include <bits/stdc++.h>
 using namespace std;
 
+void Merge(vector<int>& arr, int l, int mid, int h) {
+    int i = l;
+    int j = mid + 1;
+    int k = l;
+    int s = arr.size();
+    vector<int> B(s);
 
-void merge(int arr[], int left, int mid, int right)
-{
-    int n1 = mid - left + 1;
-    int n2 = right - mid;
-
-
-    int leftArr[n1], rightArr[n2];
-
-
-    for (int i = 0; i < n1; i++)
-        leftArr[i] = arr[left + i];
-    for (int i = 0; i < n2; i++)
-        rightArr[i] = arr[mid + 1 + i];
-
-
-    int i = 0, j = 0, k = left;
-    while (i < n1 && j < n2)
-    {
-        if (leftArr[i] <= rightArr[j])
-        {
-            arr[k] = leftArr[i];
+    while (i <= mid && j <= h) {
+        if (arr[i] < arr[j]) {
+            B[k] = arr[i];
             i++;
-        }
-        else
-        {
-            arr[k] = rightArr[j];
+        } else {
+            B[k] = arr[j];
             j++;
         }
         k++;
     }
 
-
-    while (i < n1)
-    {
-        arr[k] = leftArr[i];
+    while (i <= mid) {
+        B[k] = arr[i];
         i++;
         k++;
     }
 
-    while (j < n2)
-    {
-        arr[k] = rightArr[j];
+    while (j <= h) {
+        B[k] = arr[j];
         j++;
         k++;
     }
-}
 
-void mergeSort(int arr[], int left, int right)
-{
-    if (left < right)
-    {
-
-        int mid = left + (right - left) / 2;
-
-
-        mergeSort(arr, left, mid);
-        mergeSort(arr, mid + 1, right);
-
-
-        merge(arr, left, mid, right);
+    for (int x = 1; x <=h; x++) {
+        arr[x] = B[x];
     }
 }
 
-
-void printArray(int arr[], int size)
-{
-    for (int i = 0; i < size; i++)
-    {
-        cout << arr[i] << " ";
+void Merge_Sort(vector<int>& arr, int l, int h) {
+    if (l < h) {
+        int mid = (l + h) / 2;
+        // Recursively sort the first half
+        Merge_Sort(arr, l, mid);
+        // Recursively sort the second half
+        Merge_Sort(arr, mid + 1, h);
+        // Merge the two sorted halves
+        Merge(arr, l, mid, h);
     }
-    cout << endl;
 }
 
-int main()
-{
+int main() {
     int n;
-    cout << "Enter the number of elements: ";
+    cout << "Enter the number of elements in the array: ";
     cin >> n;
 
-    int arr[n];
-    cout << "Enter the elements: ";
-    for (int i = 0; i < n; i++)
-    {
+    vector<int> arr(n);
+    cout << "Enter the elements of the array: ";
+    for (int i = 0; i < n; i++) {
         cin >> arr[i];
     }
 
-    cout << "Original array: ";
-    printArray(arr, n);
-
-
-    mergeSort(arr, 0, n - 1);
+    Merge_Sort(arr, 0, n - 1);
 
     cout << "Sorted array: ";
-    printArray(arr, n);
+    for (int i = 0; i < n; i++) {
+        cout << arr[i] << " ";
+    }
+    cout << endl;
 
     return 0;
 }
