@@ -18,6 +18,7 @@ void Merge(vector<int>& arr, int l, int mid, int h) {
         }
         k++;
     }
+    //
 
     while (i <= mid) {
         B[k] = arr[i];
