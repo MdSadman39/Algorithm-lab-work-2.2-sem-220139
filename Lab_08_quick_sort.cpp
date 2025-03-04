@@ -9,8 +9,7 @@ int partition(int arr[], int low, int high)
     int i = low + 1;
     int j = high;
 
-    //Shaowon
-
+    
     while (true)
     {
         while (i <= j && arr[i] <= pivot)

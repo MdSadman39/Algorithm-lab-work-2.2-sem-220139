@@ -23,7 +23,6 @@ void dfs(int startNode,int adj[MAX_SIZE][MAX_SIZE],int visited[MAX_SIZE],int n)
              }   
         }
     }
-
 }
 int main()
 {

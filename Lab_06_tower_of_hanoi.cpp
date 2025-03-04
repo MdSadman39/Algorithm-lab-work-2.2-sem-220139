@@ -6,7 +6,7 @@ void towerOfHanoi(int n, char from, char to, char aux)
 {
     if (n == 1)
     {
-        // I am shawon. The king og the world.
+        
     // Base case: If only one disk, move it directly from source to destination
         cout << "Move disk 1 from " << from << " to " << to << endl;
         return;
